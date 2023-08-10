@@ -16,7 +16,7 @@ class _JogoState extends State<Jogo> {
   void opcaoSelecionada(String escolhaUsuario) {
     var opcoes = ["pedra", "papel", "tesoura"];
     var numero = Random().nextInt(3);
-    var escolhaApp = opcoes [numero];
+    var escolhaApp = opcoes[numero];
     switch (escolhaApp) {
       case "pedra":
         setState(() {
@@ -40,69 +40,109 @@ class _JogoState extends State<Jogo> {
       setState(() {
         this._mensasem = "parabéns!! você ganhou";
       });
-    } else if
-    ((escolhaApp == "pedra" && escolhaUsuario == "tesoura")
-        ||
+    } else if ((escolhaApp == "pedra" && escolhaUsuario == "tesoura") ||
         (escolhaApp == "tesoura" && escolhaUsuario == "papel") ||
         (escolhaApp == "papel" && escolhaUsuario == "pedra")) {
       setState(() {
         this._mensasem = "você perdeu";
       });
-    }
-    else {
+    } else {
       setState(() {
         this._mensasem = "empatou";
       });
     }
   }
 
-
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-      appBar: AppBar(title: Text("JokenPo")),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(top: 32, bottom: 15),
-            child: Text(
-              "Escolha do Aplicativo",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+            title: Text("JokenPo"),
+          backgroundColor: Colors.blueGrey,
+        ),
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 32, bottom: 15),
+              child: Text(
+                "Escolha do Aplicativo",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          Image(image: this._imagemApp, height: 100,),
-          Padding(
-            padding: EdgeInsets.only(top: 32, bottom: 15),
-            child: Text(
-              this._mensasem,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            Image(
+              image: this._imagemApp,
+              height: 100,
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 32, bottom: 15),
+              child: Text(
+                this._mensasem,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                onTap: () => opcaoSelecionada("pedra"),
-                child: Image.asset("assets/pedra.jpg", height: 95,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () => opcaoSelecionada("pedra"),
+                  child: Image.asset(
+                    "assets/pedra.jpg",
+                    height: 95,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => opcaoSelecionada("papel"),
+                  child: Image.asset(
+                    "assets/papel.jpg",
+                    height: 95,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => opcaoSelecionada("tesoura"),
+                  child: Image.asset(
+                    "assets/tesoura.jpg",
+                    height: 95,
+                  ),
+                )
+              ],
+            ),
+            Container(
+              width: 300.0,
+              height: 100.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                color: Colors.blueGrey[100],
               ),
-              GestureDetector(
-                onTap: () => opcaoSelecionada("papel"),
-                child: Image.asset("assets/papel.jpg", height: 95,),
+              child: Center(
+                child: Text(
+                  "PLACAR",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.overline,
+                    decorationStyle: TextDecorationStyle.double,
+                  ),
+                ),
               ),
-              GestureDetector(
-                onTap: () => opcaoSelecionada("tesoura"),
-                child: Image.asset("assets/tesoura.jpg", height: 95,),
-              )
-            ],
-          ),
-        ],
-      ));
-}}
+            ),
+            Container(
+              width: 300.0,
+              height: 200.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                color: Colors.blueGrey[50],
+              ),
+            ),
+          ],
+        ));
+  }
+}
