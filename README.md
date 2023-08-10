@@ -1,7 +1,7 @@
 # jokenpoflutter
 I present the classic game jokenpô, this project you will play against the application, it contains a scoreboard to show how many times the application won and how many times the user won.
 
-| Website Image |
+| Image |
 |----------|
 | ![App Screenshot](screenshot/game.jpg) |
 
