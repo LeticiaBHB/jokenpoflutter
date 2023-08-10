@@ -5,6 +5,7 @@ I present the classic game jokenpô, this project you will play against the appl
 |----------|
 | ![App Screenshot](screenshot/game.jpg) |
 
+tested and developed for android only, so there may be some layout change on other technology platforms
 
 ##License
 MIT License
