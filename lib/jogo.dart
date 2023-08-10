@@ -14,11 +14,11 @@ class _JogoState extends State<Jogo> {
   var _mensasem = "Escolha uma opção abaixo";
   int playerScore = 0;
   int appScore = 0;
+
   void opcaoSelecionada(String escolhaUsuario) {
     var opcoes = ["pedra", "papel", "tesoura"];
     var numero = Random().nextInt(3);
     var escolhaApp = opcoes[numero];
-
 
     switch (escolhaApp) {
       case "pedra":
@@ -41,19 +41,19 @@ class _JogoState extends State<Jogo> {
         (escolhaUsuario == "tesoura" && escolhaApp == "papel") ||
         (escolhaUsuario == "papel" && escolhaApp == "pedra")) {
       setState(() {
-        this._mensasem = "parabéns!! você ganhou";
+        this._mensasem = "Parabéns!! você ganhouu";
         playerScore++;
       });
     } else if ((escolhaApp == "pedra" && escolhaUsuario == "tesoura") ||
         (escolhaApp == "tesoura" && escolhaUsuario == "papel") ||
         (escolhaApp == "papel" && escolhaUsuario == "pedra")) {
       setState(() {
-        this._mensasem = "você perdeu";
+        this._mensasem = "Você perdeu";
         appScore++;
       });
     } else {
       setState(() {
-        this._mensasem = "empatou";
+        this._mensasem ="Empatou";
       });
     }
   }
@@ -62,116 +62,128 @@ class _JogoState extends State<Jogo> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-        appBar: AppBar(
-            title: Text("JokenPo"),
-          backgroundColor: Colors.blueGrey,
-        ),
-        body: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 32, bottom: 15),
-              child: Text(
-                "Escolha do Aplicativo",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+      appBar: AppBar(
+        title: Text("JokenPo"),
+        backgroundColor: Colors.blueGrey,
+      ),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 32, bottom: 15),
+            child: Text(
+              "Escolha do Aplicativo",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Image(
-              image: this._imagemApp,
-              height: 100,
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 32, bottom: 15),
-              child: Text(
-                this._mensasem,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+          ),
+          Image(
+            image: this._imagemApp,
+            height: 100,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 32, bottom: 15),
+            child: Text(
+              this._mensasem,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                onTap: () => opcaoSelecionada("pedra"),
+                child: Image.asset(
+                  "assets/pedra.jpg",
+                  height: 95,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => opcaoSelecionada("papel"),
+                child: Image.asset(
+                  "assets/papel.jpg",
+                  height: 95,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => opcaoSelecionada("tesoura"),
+                child: Image.asset(
+                  "assets/tesoura.jpg",
+                  height: 95,
+                ),
+              )
+            ],
+          ),
+          Container(
+            width: 300.0,
+            height: 300.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              color: Colors.blueGrey[100],
+            ),
+            child: Column(
               children: [
-                GestureDetector(
-                  onTap: () => opcaoSelecionada("pedra"),
-                  child: Image.asset(
-                    "assets/pedra.jpg",
-                    height: 95,
+                Center(
+                  child: Text(
+                    "PLACAR",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.overline,
+                      decorationStyle: TextDecorationStyle.double,
+                    ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => opcaoSelecionada("papel"),
-                  child: Image.asset(
-                    "assets/papel.jpg",
-                    height: 95,
+                Container(
+                  width: 200.0,
+                  height: 100.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                    color: Colors.blueGrey[50],
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Você: $playerScore",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "App: $appScore",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => opcaoSelecionada("tesoura"),
+                Container(
                   child: Image.asset(
-                    "assets/tesoura.jpg",
-                    height: 95,
+                    "assets/inicio.png", width: 150,
                   ),
-                )
+                ),
               ],
             ),
-            Container(
-              width: 300.0,
-              height: 50.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                color: Colors.blueGrey[100],
-              ),
-              child: Center(
-                child: Text(
-                  "PLACAR",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.overline,
-                    decorationStyle: TextDecorationStyle.double,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              width: 200.0,
-              height: 100.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                color: Colors.blueGrey[50],
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                        "Você: $playerScore",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    Text("App: $appScore",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }
+
 
