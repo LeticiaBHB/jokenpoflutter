@@ -12,11 +12,14 @@ class Jogo extends StatefulWidget {
 class _JogoState extends State<Jogo> {
   var _imagemApp = AssetImage("assets/inicio.png");
   var _mensasem = "Escolha uma opção abaixo";
-
+  int playerScore = 0;
+  int appScore = 0;
   void opcaoSelecionada(String escolhaUsuario) {
     var opcoes = ["pedra", "papel", "tesoura"];
     var numero = Random().nextInt(3);
     var escolhaApp = opcoes[numero];
+
+
     switch (escolhaApp) {
       case "pedra":
         setState(() {
@@ -39,12 +42,14 @@ class _JogoState extends State<Jogo> {
         (escolhaUsuario == "papel" && escolhaApp == "pedra")) {
       setState(() {
         this._mensasem = "parabéns!! você ganhou";
+        playerScore++;
       });
     } else if ((escolhaApp == "pedra" && escolhaUsuario == "tesoura") ||
         (escolhaApp == "tesoura" && escolhaUsuario == "papel") ||
         (escolhaApp == "papel" && escolhaUsuario == "pedra")) {
       setState(() {
         this._mensasem = "você perdeu";
+        appScore++;
       });
     } else {
       setState(() {
@@ -56,6 +61,7 @@ class _JogoState extends State<Jogo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
             title: Text("JokenPo"),
           backgroundColor: Colors.blueGrey,
@@ -116,7 +122,7 @@ class _JogoState extends State<Jogo> {
             ),
             Container(
               width: 300.0,
-              height: 100.0,
+              height: 50.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 color: Colors.blueGrey[100],
@@ -135,14 +141,37 @@ class _JogoState extends State<Jogo> {
               ),
             ),
             Container(
-              width: 300.0,
-              height: 200.0,
+              width: 200.0,
+              height: 100.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 color: Colors.blueGrey[50],
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                        "Você: $playerScore",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    Text("App: $appScore",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
         ));
   }
 }
+
